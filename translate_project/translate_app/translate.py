@@ -16,8 +16,8 @@ class r_s:
 	path = os.path.join(os.getcwd(), 'google.json')
 	os.environ['GOOGLE_APPLICATION_CREDENTIALS']=path
 
-	def __init__(self, url = url, text='hello'):
-		self.url = url
+	def __init__(self,text='hello', url = url):
+		self.url = urlfr
 		self.text = text
 		self.is_translated = False
 
@@ -30,10 +30,10 @@ class r_s:
 		return self.text
 
 	def translate_text(self, target_language='es'):
-		if not(self.is_translated):
-			self.request_soup()
+		#if not(self.is_translated):
+		#	self.request_soup()
 		translate_client = translate.Client()
 		translation = translate_client.translate(self.text, target_language=target_language)
-		translation = [para['translatedText'] for para in translation]
+		#translation = [para['translatedText'] for para in translation]
 		self.translation = translation
 		return self.translation

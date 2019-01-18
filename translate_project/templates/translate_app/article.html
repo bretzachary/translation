@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+	<head>
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+		<style>
+		div {
+			width: 600px;
+			font-family: 'Roboto', sans-serif;
+			font-size: 20px
+		}
+		</style>
+
+	</head>
+	
+	<body>
+
+	{{article.title}}
+
+	{% for img in images %}
+		<img src='{{MEDIA_URL}}{{img.picture}}' />
+	{% endfor %}
+
+</br>
+
+	{% for para in paragraph_container %}
+		<div>
+			<p title="{{para.text|safe}}">{{para.trans|safe}} </p>
+		</div>
+	{% endfor %}
+
+
+
+
+	<div>
+		<p>
+		</p>
+	</div>
+
+	
+	</body>
+
+</html>

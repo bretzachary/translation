@@ -1,0 +1,15 @@
+problem with getting two-gram count: it includes fluff like 'de la'
+so to filter: the naive bayes trick from scikit tutorial. alternatively, just filter manually selected words. can the trick identify words 'most associated' with article. or most important words across articles?
+
+
+
+ideas:
+next to article highlight noteworthy vocab (unique, common, etc)
+same as above - with definitions at top of articles. sort of a 'what to expect' section.
+
+
+to do:
+clean up article page
+category/section page
+category/section subsections on front page
+accounts - articles read, vocab_stuff,  ?(achievements)

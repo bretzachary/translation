@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+	<head>
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+		<style>
+		div {
+			width: 600px;
+			font-family: 'Roboto', sans-serif;
+			font-size: 20px
+		}
+		</style>
+
+	</head>
+	
+	<body>
+
+	{{article.title}}
+
+	{{article.text}}
+
+	{% for para in empty %}
+		<div>
+			<p title="{{para.text}}">{{para.trans}} </p>
+		</div>
+	{% endfor %}
+
+
+
+
+	<div>
+		<p>
+		</p>
+	</div>
+
+	
+	</body>
+
+</html>

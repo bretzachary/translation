@@ -1,12 +1,37 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html>
 	<head>
-		<title>Rango</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="{% static "js/translate-jquery.js" %}"></script>
+
 	</head>
 	
 	<body>
+
+	<!--	<input type="text" name="link" value="" id="link"/>
+		<input type="button" id="link_submit" value="translate page"/>
+	-->
+
+	<!--
+		<form id='link_form' method="" action="">
+			{% csrf_token %}
+			<input type="text" id="link_field" name="link">
+			<input type="submit" name="submit" value="zach">
+		</form>
+	-->
 		{{ boldmessage }}
 	
+	{% if articles %}
+		{% for article in articles %}
+			<div>
+				<a href="{% url 'article_page' article.slug %}">{{article.title}}</a>
+				<p>{{article.date}}</p>
+			</div>
+		{% endfor %}
+	{% endif %}
+
 	</body>
 
 </html>
