@@ -7,5 +7,5 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('input_link_page', views.input_link_page),
-    path('article/<slug:slug>', views.article_page, name='article_page')
+    path('article/<slug:slug>', views.article_page2, name='article_page')
  ]

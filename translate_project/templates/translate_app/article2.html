@@ -18,14 +18,30 @@
 	
 	<body>
 
-	{{article.title}}
+	<p>{{article.title}}</p>
 
-	{{article.text}}
 
-	{% for para in empty %}
+<!--
+	{% for img in images %}
+		<img src='{{MEDIA_URL}}{{img.picture}}' />
+	{% endfor %}
+-->
+
+	{% for para in paragraph_container %}
+	{% if para.text %}
 		<div>
-			<p title="{{para.text}}">{{para.trans}} </p>
+			<p title="{{para.text|safe}}">{{para.trans|safe}} </p>
 		</div>
+	
+	{% else %}
+	<p>
+
+		<img src='{{MEDIA_URL}}{{para}}' />
+
+		<p>
+	{% endif %}
+
+
 	{% endfor %}
 
 

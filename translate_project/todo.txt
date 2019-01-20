@@ -5,7 +5,11 @@ so to filter: the naive bayes trick from scikit tutorial. alternatively, just fi
 
 ideas:
 next to article highlight noteworthy vocab (unique, common, etc)
+maybe categoriza vcab by importance (frequency)
 same as above - with definitions at top of articles. sort of a 'what to expect' section.
+don't forget about a/b testing
+hbr
+blogs <- might be easiest ppl to reach out to (for licensing)
 
 
 to do:
@@ -13,3 +17,35 @@ clean up article page
 category/section page
 category/section subsections on front page
 accounts - articles read, vocab_stuff,  ?(achievements)
+
+def article(i,p):
+     img=imgs(i)
+     para=paras(p)
+     print(img[0])
+     skip_factor = int(p/i)
+     counter=0
+     for sf in range(skip_factor):
+     	print(para[counter:counter+1])
+	counter+=1
+
+def article(i,p):
+...     img=imgs(i)
+...     para=paras(p)
+...     print(img[0])
+...     skip_factor = int(p/i)
+...     print(para[:skip_factor])
+
+def article(i,p):
+     skip_factor = int(p/i)
+     img=imgs(i)
+     para=paras(p)
+
+     counter=0
+
+     for im in img:
+     	print(im)
+     
+     	
+     	for sf in range(skip_factor):
+     		print(para[counter:counter+1])
+		counter+=1

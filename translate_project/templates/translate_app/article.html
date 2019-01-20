@@ -17,8 +17,12 @@
 	</head>
 	
 	<body>
+{{paragraph_count}}
+	{{images.count}}
 
 	{{article.title}}
+
+
 
 	{% for img in images %}
 		<img src='{{MEDIA_URL}}{{img.picture}}' />

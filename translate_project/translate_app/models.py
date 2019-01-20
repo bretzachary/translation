@@ -36,6 +36,12 @@ class Tag(models.Model):
 	def __str__(self):
 		return self.tag
 
+#class UserRecords(models.Model):
+#	user = models.OneToOneField(User)
+
+	#articles
+
+
 #class Section(models.Model):
 #	article = models.ManyToManyField(Article)
 #	section = models.CharField(max_length=128)
