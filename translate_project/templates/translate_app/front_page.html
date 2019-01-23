@@ -46,23 +46,49 @@
 
 --> 
     </div>
-   
 
-<div class='w3-container'>
-{% if articles %}
-    {% for article in articles %}
-      <div>
 
-    <div class='w3-card'  style="width:300px">
-      <a href="{% url 'article_page' article.slug %}">{{article.title}}</a>
-      <br>
-      subtitle
-      <br>
-       <p>{{article.date}}</p>
-    </div>
+
+  
+
+
+  <div class='w3-container'>
+  {% if articles %}
+      {% for article in articles %}
+        <div>
+
+      <div class='w3-card'  style="width:300px">
+
+        {% if user.is_authenticated %}
+
+
+        <a href="{% url 'article_page' article.slug %}">{{article.title}}</a>  
+
+        {% else %}
+
+        poo       
+
+
+        {% endif %}
+
+        <br>
+        subtitle
+        <br>
+         <p>{{article.date}}</p>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+{% for section in sections %}
+  <strong>{{section.name}}</strong>
+  <br>
+    {% for article in section.articles %}
+      <p>{{article.title}}</p>
     {% endfor %}
-  {% endif %}
-</div>
+{% endfor %}
+
+
 
 
 </body>

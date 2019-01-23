@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+	<head>
+	</head>
+
+	<body>
+
+		{% if registered %}
+			zach, create link back to homepage
+		{% else %}
+			register here
+			<form id='user_form' method='post' action="{% url 'register' %}">
+			{% csrf_token %}
+			{{user_form.as_p}}
+			<input type="submit" name="submit" value="Register" />
+			</form>
+		{% endif %}		
+
+	</body>
+</hmtl>

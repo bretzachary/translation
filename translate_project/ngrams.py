@@ -2,7 +2,7 @@
 
 import json
 import re
-from translate_apps.models import Article
+from translate_app.models import Article
 
 #re.sub("[,.-']",' ', ss]
 corpus = []
@@ -15,9 +15,9 @@ for art in arts:
 string_corpus = ' '.join(corpus)
 
 def find_ngrams(s, n):
-	s=slower()
+	s=s.lower()
 	s=re.sub(r"[,.-/']",' ',s)
-	tokens = [token for token in s.split(" ") if token !=""}
+	tokens = [token for token in s.split(" ") if token !=""]
 	ngrams= zip(*[tokens[i:] for i in range(n)])
 	return [" ".join(ngram) for ngram in ngrams]
 

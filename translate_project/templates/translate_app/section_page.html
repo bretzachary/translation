@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+	<head>
+	</head>
+	<body>
+	
+		{%for article in articles %}
+			{{article.title}}
+		</br>
+		{% endfor %}
+
+	</body>
+</html>
