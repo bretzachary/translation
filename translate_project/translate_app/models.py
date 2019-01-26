@@ -43,9 +43,13 @@ class ArticleViews(models.Model):
 	article = models.ForeignKey(Article, on_delete=models.SET_NULL, blank=True, null=True)
 	date_viewed = models.DateField(auto_now=True)
 
-	#if more info about this relationship is desired (date, time spent reading, favorited etc)
-	#then a through_field will need to be defined, as shown in chrom bookmarks folder(django/models/manytomany)
-#	article_viewed = models.ManyToManyField(article)
+class ArticleWords(models.Model):
+	article = models.OneToOneField(Article, on_delete=models.SET_NULL, null=True)
+	all_words = models.TextField()
+	most_common_words = models.TextField()
+	tfidf_words = models.TextField()
+
+
 
 
 
@@ -55,3 +59,4 @@ class ArticleViews(models.Model):
 #
 #	def __str__(self):
 #		return self.section
+

@@ -1,11 +1,21 @@
 problem with getting two-gram count: it includes fluff like 'de la'. (stop words)
 so to filter: the naive bayes trick from scikit tutorial (tfidf). alternatively, just filter manually selected words. can the trick identify words 'most associated' with article. or most important words across articles?
 
+center words
 
+https://longreads.com/2019/01/22/the-heartbeat-of-wounded-knee/
 
 ideas:
+what does it mean to be a content aggregator? platform. classpass? spotify?
+word feature
+survey/get reader info when signup (where from. howlong studying? are they a regular reader of any of papers (this last point can be used to drive value. especially on the 'learn english' site. englisht that is translated back to them.ie, readers who otherwise would not read these sources.))
 next to article highlight noteworthy vocab (unique, common, etc)
 maybe categoriza vcab by importance (frequency)
+	vocab. as little as possible generated per request
+	top 500 or so most common words. show the ones that appear in article.
+	the tf-idf words. maybe the top five from the article. filter for non-words.
+def recommended articles
+
 same as above - with definitions at top of articles. sort of a 'what to expect' section.
 don't forget about a/b testing
 harvard business review articles
@@ -13,14 +23,22 @@ blogs <- might be easiest ppl to reach out to (for licensing)
 
 
 to do:
-user_page('profile')  - can just start with articles read. maybe an optional button for 'read whole article/did not read whole article' would be a start.<-button can go at end of article. no need to annouce it elsewhere.
-
-category/section page
-category/section subsections on front page
+user_page('profile')  - can just start with articles read. maybe an optional button for 'read whole article/did not read whole article' would be a start.<-button can go at end of article. no need to annouce it elsewhere. boolean model field
 accounts - articles read, vocab_stuff,  ?(achievements)
+
 
 <!--        <a href="{% url 'track_article_pageviews' %}?article_id={{article.id}}>" -->
 
-Article.objects.order_by('section').values_list('section', flat=True).distinct()
+subscritions:
+the athletic
+wsj
+nytimes
+wp
 
-Article.objects.values_list('section', flat=True).distinct
+word_workflow:
+load up pandas with {1}most_common_words
+should each article have a pandas of {2}all_article_words (will this make word serch faster)?
+search for each of {2} in {1}
+those words go at top of article
+---
+periodically run a (is it a routine)?

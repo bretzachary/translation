@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 import os
 import json
 from . import translate
+from .vocab import views_bit
 
 @login_required
 def user_logout(request): 
@@ -190,7 +191,7 @@ def article_page(request, slug):
 
 
 def section_page(request, section):
-	articles = Article.obejcts.filter(section=section)
+	articles = Article.objects.filter(section=section)
 	context_dict = {'articles':articles}
 	return render(request, 'translate_app/section_page.html', context=context_dict)
 
@@ -259,6 +260,7 @@ def article_page2(request, slug):
 	paragraph_count = len(paragraph_container)
 
 	context_dict={'paragraph_container':paragraph_container, 'article':article, 'images':images, 'paragraph_count':paragraph_count}
+	context_dict['vocab'] = views_bit(article)
 
 	return render(request, 'translate_app/article2.html', context=context_dict)
 

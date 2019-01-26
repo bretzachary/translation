@@ -24,4 +24,4 @@ def find_ngrams(s, n):
 s = find_ngrams(string_corpus, 1)
 from collections import Counter
 s_counter = Counter(s)
-s_counter.most_common(400)
+s_counter.most_common(800)
