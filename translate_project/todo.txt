@@ -1,22 +1,25 @@
-problem with getting two-gram count: it includes fluff like 'de la'. (stop words)
-so to filter: the naive bayes trick from scikit tutorial (tfidf). alternatively, just filter manually selected words. can the trick identify words 'most associated' with article. or most important words across articles?
-
-center words
-
+(also) pip install requests, bs4, pillow, google
 https://longreads.com/2019/01/22/the-heartbeat-of-wounded-knee/
 
 ideas:
-what does it mean to be a content aggregator? platform. classpass? spotify?
-word feature
-survey/get reader info when signup (where from. howlong studying? are they a regular reader of any of papers (this last point can be used to drive value. especially on the 'learn english' site. englisht that is translated back to them.ie, readers who otherwise would not read these sources.))
-next to article highlight noteworthy vocab (unique, common, etc)
-maybe categoriza vcab by importance (frequency)
-	vocab. as little as possible generated per request
-	top 500 or so most common words. show the ones that appear in article.
-	the tf-idf words. maybe the top five from the article. filter for non-words.
-def recommended articles
 
+what does it mean to be a content aggregator? platform. classpass? spotify?
+collectivize subscriptions?
+	person A buys NYT, person B WSJ
+	they share articles. subscritions are 'grouped'
+	maybe enforce that each user has a subcription to *a publication
+	remit payments to publishers proportional to articles read
+	or if they 'pay' then that money goes into a pool that pays publishers
+
+survey/get reader info when signup (where from. howlong studying? are they a regular reader of any of papers (this last point can be used to drive value. especially on the 'learn english' site. englisht that is translated back to them.ie, readers who otherwise would not read these sources -spanish readers etc.))
+
+maybe categoriza vcab by importance (frequency)
 same as above - with definitions at top of articles. sort of a 'what to expect' section.
+
+profile(account)page:
+recommended articles (even if 'not enough data')
+recently read articles
+
 don't forget about a/b testing
 harvard business review articles
 blogs <- might be easiest ppl to reach out to (for licensing)
@@ -26,19 +29,22 @@ to do:
 user_page('profile')  - can just start with articles read. maybe an optional button for 'read whole article/did not read whole article' would be a start.<-button can go at end of article. no need to annouce it elsewhere. boolean model field
 accounts - articles read, vocab_stuff,  ?(achievements)
 
-
-<!--        <a href="{% url 'track_article_pageviews' %}?article_id={{article.id}}>" -->
-
 subscritions:
 the athletic
 wsj
 nytimes
-wp
+washpo
 
-word_workflow:
-load up pandas with {1}most_common_words
-should each article have a pandas of {2}all_article_words (will this make word serch faster)?
-search for each of {2} in {1}
-those words go at top of article
 ---
-periodically run a (is it a routine)?
+before deploy: don't forget to get SSL(?) certificate (explained in gunicorn/django/virtualenv/etc setp tutorial).
+
+periodically run a (is it a routine? - cron job? celery task?) that will update the '_800_most_common_words.txt' file and also populate each articlewords model with correct most_common_words-field data. again, so that it is not computed on the fly as is currently done with the 'views bit' function and can instead just be a model query.
+
+'media' is dying. that is a good thing. we want to accelerate that. to help that to happen. logan green quote about seeing the future. what unexpected good things will come from the consolidation. the good ones will become stronger.
+in the new environment. with new technology. the world we live in today. would traditional news look how it does now if it were just invented? of course not. so let's help it adapt to new environment. legacy news is just that - legacy.
+
+maybe make totally free.
+you need an invite to join. one invite per person. ask for sponsorships/donations.
+active email to participate.
+need to re-up the email to make sure it is active. and can solicit more donations from there.
+maybe for each 'membership', a kid gets a 'membership' too.

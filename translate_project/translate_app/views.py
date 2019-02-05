@@ -97,6 +97,25 @@ def index(request, link = None):
 		featured.img = img.picture
 		featured_articles_list.append(featured)
 
+	main_article = Article.objects.get(id=13)
+	img = Image.objects.filter(article=main_article)[0]
+	main_article.img = img.picture
+
+	first_featured_articles_column =[]
+	two_featured_articles = Article.objects.all()[:2]
+	for featured in two_featured_articles:
+		img = Image.objects.filter(article=featured)[0]
+		featured.img = img.picture
+		first_featured_articles_column.append(featured)	
+
+	second_featured_articles_column =[]
+	two_featured_articles = Article.objects.all()[2:4]
+	for featured in two_featured_articles:
+		img = Image.objects.filter(article=featured)[0]
+		featured.img = img.picture
+		second_featured_articles_column.append(featured)	
+
+
 	print(request.user)
 
 	#login(request, request.user)
@@ -129,9 +148,9 @@ def index(request, link = None):
 
 
 
-	context_dict = {'articles': articles, 'featured_articles_list':featured_articles_list, 'sections':sections}
+	context_dict = {'articles': articles, 'main_article': main_article, 'first_featured_articles_column':first_featured_articles_column, 'second_featured_articles_column':second_featured_articles_column, 'featured_articles_list':featured_articles_list, 'sections':sections}
 
-	return render(request, 'translate_app/front_page.html', context=context_dict)
+	return render(request, 'translate_app/front_page_ringer_design.html', context=context_dict)
 
 
 #	def track_article_pageviews(request):
@@ -235,19 +254,15 @@ def article_page2(request, slug):
 	if len(images)>1:
 		skip_factor = int(len(paragraph_container)/len(images))
 		for i in range(len(images)):
-			#index_position += skip_factor
 			index_position = i*skip_factor
 			print(i)
 			print(skip_factor)
 
 			paragraph_container.insert(index_position, str(images[i].picture))
-			#paragraph_container[index_position] = str(images[i].picture)
 
 #			paragraph_container[index_position:index_position] = str(images[i].picture)
 	else:
-		#paragraph_container[:0]=images[0].picture
 		paragraph_container.insert(0, images[0].picture)
-		#paragraph_container[0]=images[0].picture
 
 
 	print(images)	
@@ -262,7 +277,7 @@ def article_page2(request, slug):
 	context_dict={'paragraph_container':paragraph_container, 'article':article, 'images':images, 'paragraph_count':paragraph_count}
 	context_dict['vocab'] = views_bit(article)
 
-	return render(request, 'translate_app/article2.html', context=context_dict)
+	return render(request, 'translate_app/article_page_redesign.html', context=context_dict)
 
 
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-bar ">
+  <h2 class='w3-margin w3-bar-item'>Logo</h2>
+  <h2 class='w3-margin w3-bar-item w3-right'>my account</h2>
+</div>
+
+<div class="w3-row">
+  <div class="w3-col m4 l3 w3-border-right w3-padding w3-large"style="height:400px",>
+    <p>12 columns on a small screen, 4 on a medium screen, and 3 on a large screen.</p>
+
+    {% for word in vocab %}
+    <p>{{word}}</p>
+    {% endfor %}
+
+  </div>
+
+  <div class="w3-col m8 l6 w3-padding">
+
+    <h4>{{article.publisher}}</h4>
+    <h2>{{article.title}}</h2>
+
+    {% for para in paragraph_container %}
+      {% if para.text %}
+        <div class='w3-large'>
+          <p title="{{para.text|safe}}">{{para.trans|safe}} </p>
+        </div>
+      {% else %}
+        <p>
+        <img src='{{MEDIA_URL}}{{para}}'/>
+        <p>
+      {% endif %}
+    {% endfor %}
+
+
+  </div>
+
+  <div class="w3-col l3">
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -13,6 +13,8 @@ def update_common_words(article):
 	words_container = []
 
 	#article = Article.objects.get(pk=article)
+	#maybe should throw error if not every article has associated ArticleWords
+	#or even better create that model object(row) when create article
 	articlewords = ArticleWords.objects.get_or_create(article=article)[0]
 
 	text = json.decoder.JSONDecoder().decode(article.translated_text)
@@ -41,7 +43,7 @@ def views_bit(article):
 	#so it's precomupted (vs generated anew each time)
 	common_words_in_article=set(unique_words_in_article & most_common_words)
 
-	#this part goes in view, to be included in conext_dict
+	#this part goes in view, to be included in context_dict
 	word_sample = sample(common_words_in_article, 20)
 
 	print(word_sample)
