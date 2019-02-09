@@ -2,14 +2,84 @@
 {% load static %}
 
 <html>
-	<head>
-	</head>
-	<body>
-	
-		{%for article in articles %}
-			{{article.title}}
-		</br>
-		{% endfor %}
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans|Lato|Merriweather|Merriweather+Sans|Noto+Sans+JP|Open+Sans|Source+Sans+Pro|Varela+Round" rel="stylesheet">
 
-	</body>
+<style>
+
+a:link {
+    text-decoration: none;
+}
+
+
+p {
+font-family: 'Open Sans', sans-serif;
+margin-top: 0px;
+
+}
+
+h1, h2 {
+  margin-top: -14px;
+  margin-bottom: 15px;
+  line-height: 32px;
+  font-family: 'Merriweather Sans', sans-serif;
+
+}
+
+</style>
+
+<body>
+
+<div class='w3-top'>
+<div class="w3-container w3-black w3-padding-16 w3-margin-bottom">
+    <div class=' w3-margin-left'>
+      <div class='w3-margin-left' style='max-width:1050px; margin:auto'>
+        <h3>Displaying Colors</h3> 
+      </div>
+  </div>
+</div>
+</div>
+
+</br>
+</br>
+</br>
+</br>
+
+<div style='max-width:1000px; margin:auto'>
+
+  <div class= ' w3-panel'>
+  </br>
+  	<h1>{{section}}</h1>
+  </div>
+
+
+{%for article in articles %}
+<div class="w3-row w3-margin ">
+
+  <div class='w3-col m4'>
+    <a href="{% url 'article_page' article.slug %}">
+    	<img class='w3-image' src='{{ MEDIA_URL }}{{article.img.picture}}'>
+    </a>
+  </div>
+  <div class='w3-container w3-col m8'>
+    <p>{{article.publisher}}</p>
+    
+    <a href="{% url 'article_page' article.slug %}">
+    	<h2><strong>{{article.title}} 
+    	</strong></h2>
+    	<p style='margin-top: -10px;'> let's throw more words in there for a subtitle, and let's make it a bit bigger and stuff</p>
+    <a>
+
+  </div>
+</div>
+
+{% endfor %}
+
+
+
+</div>
+
+</body>
 </html>

@@ -211,7 +211,9 @@ def article_page(request, slug):
 
 def section_page(request, section):
 	articles = Article.objects.filter(section=section)
-	context_dict = {'articles':articles}
+	for article in articles:
+		article.img = article.image_set.first()
+	context_dict = {'articles':articles, 'section':section}
 	return render(request, 'translate_app/section_page.html', context=context_dict)
 
 
@@ -222,7 +224,6 @@ class StoryUnit(): pass
 
 
 def article_page2(request, slug):
-
 
 	article = Article.objects.get(slug=slug)
 	images = Image.objects.filter(article=article)
@@ -238,39 +239,22 @@ def article_page2(request, slug):
 		test.trans =i[1]
 		paragraph_container.append(test)
 
-
 	if request.user.is_authenticated:
 		ArticleViews.objects.create(article=article, user=request.user)
 
-		print(ArticleViews.objects.filter(article=article, user=request.user))
-	
+		#print(ArticleViews.objects.filter(article=article, user=request.user))
 
-	#container_with_images =[]
-	#for img in imgs:
-	#index_position = 0
-	#paragraph_container[index_position] = images[0]
 	paragraph_container[0]
 
 	if len(images)>1:
 		skip_factor = int(len(paragraph_container)/len(images))
 		for i in range(len(images)):
 			index_position = i*skip_factor
-			print(i)
-			print(skip_factor)
 
 			paragraph_container.insert(index_position, str(images[i].picture))
 
-#			paragraph_container[index_position:index_position] = str(images[i].picture)
 	else:
 		paragraph_container.insert(0, images[0].picture)
-
-
-	print(images)	
-	print(paragraph_container[0])
-	print(paragraph_container[1])
-	print(paragraph_container[2])
-	print(paragraph_container[3])
-	print(paragraph_container[4])
 
 	paragraph_count = len(paragraph_container)
 
@@ -314,3 +298,100 @@ def photo_placement(images,paragraphs):
 	img_plus_paras_list.append(last_para_container)
 
 	return img_plus_paras_list
+
+
+
+
+
+
+#with the paywall
+#this is basically the case study for templates
+def article_paywall(request, slug):
+
+
+	article = Article.objects.get(slug=slug)
+	images = Image.objects.filter(article=article)
+	#text = open(os.path.join(os.getcwd(), 'test_text.txt'), 'r').read().splitlines()
+	text = json.decoder.JSONDecoder().decode(article.text)
+	#trans = open(os.path.join(os.getcwd(), 'test_trans.txt'), 'r').read().splitlines()
+	translated_text = json.decoder.JSONDecoder().decode(article.translated_text)
+	text_plus_translation = list(zip(text,translated_text))
+	paragraph_container=[]
+	for i in text_plus_translation:
+		test = Test()
+		test.text = i[0]
+		test.trans =i[1]
+		paragraph_container.append(test)
+
+	if request.user.is_authenticated:
+		ArticleViews.objects.create(article=article, user=request.user)
+
+	if len(images)>1:
+		skip_factor = int(len(paragraph_container)/len(images))
+		for i in range(len(images)):
+			index_position = i*skip_factor
+			
+
+			paragraph_container.insert(index_position, str(images[i].picture))
+
+	else:
+		paragraph_container.insert(0, images[0].picture)
+
+	title_img = paragraph_container[0]
+
+	paragraph_container = paragraph_container[1:5]
+
+	paragraph_count = len(paragraph_container)
+
+	context_dict={'paragraph_container':paragraph_container, 'title_img':title_img,'article':article, 'images':images, 'paragraph_count':paragraph_count}
+	context_dict['vocab'] = views_bit(article)
+
+	return render(request, 'translate_app/article_paywall.html', context=context_dict)
+
+
+
+#name this function
+def article_page_with_paywall(request, slug):
+
+	article = Article.objects.get(slug=slug)
+	images = Image.objects.filter(article=article)
+	#text = open(os.path.join(os.getcwd(), 'test_text.txt'), 'r').read().splitlines()
+	text = json.decoder.JSONDecoder().decode(article.text)
+	#trans = open(os.path.join(os.getcwd(), 'test_trans.txt'), 'r').read().splitlines()
+	translated_text = json.decoder.JSONDecoder().decode(article.translated_text)
+	text_plus_translation = list(zip(text,translated_text))
+	paragraph_container=[]
+	for i in text_plus_translation:
+		test = Test()
+		test.text = i[0]
+		test.trans =i[1]
+		paragraph_container.append(test)
+
+	if len(images)>1:
+		skip_factor = int(len(paragraph_container)/len(images))
+		for i in range(len(images)):
+			index_position = i*skip_factor
+			paragraph_container.insert(index_position, str(images[i].picture))
+
+	else:
+		paragraph_container.insert(0, images[0].picture)
+
+
+	context_dict={}
+	context_dict['vocab'] = views_bit(article)
+	paragraph_count = len(paragraph_container)
+
+	if request.user.is_authenticated:
+		ArticleViews.objects.create(article=article, user=request.user)
+
+		context_dict={'paragraph_container':paragraph_container, 'article':article, 'images':images, 'paragraph_count':paragraph_count}
+	
+		return render(request, 'translate_app/article_page_redesign.html', context=context_dict)
+
+	else:
+		title_img = paragraph_container[0]
+		paragraph_container = paragraph_container[1:5]
+
+		context_dict={'paragraph_container':paragraph_container, 'title_img':title_img,'article':article, 'images':images, 'paragraph_count':paragraph_count}
+
+		return render(request, 'translate_app/article_paywall.html', context=context_dict)

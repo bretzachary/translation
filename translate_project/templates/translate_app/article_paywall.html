@@ -17,11 +17,27 @@ p {
   font-family: 'Open Sans', sans-serif;
 }
 
+div.relative {
+    position: relative;
+    width: 500px;
+    height: auto;
+  
+} 
+ 
+div.absolute {
+    top:0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1))
+}
+
 </style>
 
 
 
 <body>
+
 
 <!--
 <div class="w3-bar ">
@@ -40,7 +56,7 @@ p {
 </div>
 
 <div class="w3-row">
-  <div class="w3-col m4 l3 w3-border-right w3-padding w3-large"style="height:400px",>
+  <div class="w3-col m3 l3 w3-border-right w3-padding w3-large"style="height:400px",>
     <p>12 columns on a small screen, 4 on a medium screen, and 3 on a large screen.</p>
 
     {% for word in vocab %}
@@ -49,28 +65,31 @@ p {
 
   </div>
 
-  <div class="w3-col m8 l7 w3-padding">
 
+  <div class="w3-col m9 l7 w3-padding">
     <h4>{{article.publisher}}</h4>
     <strong><h2>{{article.title}}</h2></strong>
+    <img class='w3-image' src='{{MEDIA_URL}}{{title_img}}'/>
+    <div class='relative' style='width:100%'>
+      {% for para in paragraph_container %}
+          <p class='w3-large' title="{{para.text|safe}}" >{{para.trans|safe}} </p>
+      {% endfor %}
+      <div class='absolute'></div>
+    </div>
 
-    {% for para in paragraph_container %}
-      {% if para.text %}
-        <div class='w3-large'>
-          <p title="{{para.text|safe}}">{{para.trans|safe}} </p>
-        </div>
-      {% else %}
-        <p>
-        <img class ='w3-image' src='{{MEDIA_URL}}{{para}}'/>
-        <p>
-      {% endif %}
-    {% endfor %}
+
+    <div class='w3-container w3-black' style="height:300px"></div>
 
 
   </div>
+
+
 
   <div class="w3-col l2">
   </div>
+
+
+
 </div>
 
 

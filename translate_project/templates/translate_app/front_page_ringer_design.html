@@ -23,21 +23,66 @@ h2{
 h4{line-height: 24px;
 }
 
+a:link {
+    text-decoration: none;
+}
+
+p .header-p{
+  all: initial;
+}
+
+
+.piff { width:100%; text-align:center; border-bottom: 4px solid #000; line-height:0.1em; margin:10px 0 20px; } 
+h2 span { background:#fff; padding:0 10px; }
+
+@media all and (min-width:600px) and (max-width: 800px) {
+  .section-subtitle { display: none; }
+}
+
 </style>
 
 <body>
 
-<div class="w3-container w3-black w3-padding-16 w3-margin-bottom">
-    <div class=' w3-margin-left'>
+<div class='w3-black'>
+    <div class="w3-container w3-row w3-padding-24 w3-margin-bottom" style='max-width:1050px; margin:auto'>          
 
-  <div class='w3-margin-left' style='max-width:1050px; margin:auto'>
-  <h3>Displaying Colors</h3> 
-  </div>
+          <div class='w3-half w3-container '>
+            <h3 class='w3-left'>Displaying Colors   </h3> <h5 class='w3-right w3-margin'> sections </h5>  
+          </div>
+
+          <div class='header-p w3-rest w3-container'>
+           <!-- <p class='header-p w3-right '> my account</p> -->
+          </div>
+
+          <div class='w3-quarter w3-container w3' >
+           <p class='header-p w3-right '> my account</p><p class=' w3-right'> logout</p>
+          </div>
+
   </div>
 </div>
 
 
-<div id='main_container' style='max-width:1050px; margin:auto'>
+
+
+<div class="w3-bar w3-light-grey">
+   <a href="#" class="w3-bar-item w3-button">LOGO</a>
+      <div class="w3-dropdown-hover">
+          <button class="w3-button w3-bar-item">sections</button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="{% url 'section_page' 'technology' %} " class="w3-bar-item w3-button">Technology</a>
+            <a href="{% url 'section_page' 'sports' %} " class="w3-bar-item w3-button">Sports</a>
+            <a href="{% url 'section_page' 'politics' %} " class="w3-bar-item w3-button">Politics</a>
+          </div>
+      </div>
+   <a href="#" class="w3-bar-item w3-button w3-right">Logout</a>
+   <a href="#" class="w3-bar-item w3-button w3-right">My Account</a>
+</div>
+
+
+
+
+
+<div id='main_container' style='max-width:1050px; margin:auto' class='article-container'>
 
 <div class="w3-row-padding">
   
@@ -46,13 +91,19 @@ h4{line-height: 24px;
         <a href="{% url 'article_page' main_article.slug %}">
             <img class='w3-image' src='{{ MEDIA_URL }}{{main_article.img}}'>
       </a>
-        <h2> <strong> title can go here let's say it's about yea long and thftn a bit more. </strong></h2>
+      <a href="{% url 'article_page' main_article.slug %}">
+            <h2> <strong> {{main_article.title}} </strong></h2>
+      </a>
+      <a href="{% url 'article_page' main_article.slug %}">
         <p> well these can be fairly long. i'd say i expect them to be longer than the title, even. One sentence, or two, they add a bit more story to the heading. </p>
         <p> by penny wise </p>
+      </a>
+
+        
     </div>
   </div>
   
-  <div class="w3-col m3 w3-container ">
+  <div class="w3-col m3 w3-container article-container">
 
     {% for featured in first_featured_articles_column %}
 
@@ -95,6 +146,97 @@ h4{line-height: 24px;
 
 
   </div>
+
+</div>
+
+
+
+
+<div class= 'w3-border-top w3-margin-bottom' ></div>
+
+<div class="w3-row" style='margin:auto'>
+    <div class='s2 w3-container w3-col w3-container ;'>
+    </div>
+    <div class='s8 w3-border w3-border-black w3-container w3-margin-bottom w3-col w3-container w3-gray 'style='height:120px;'> jgkhv
+    </div>
+    <div class='s2 w3-container w3-col w3-container '>
+    </div>
+</div>
+
+<div class= 'w3-border-top  w3-margin-bottom ' ></br></div>
+
+
+<!-- 'sections' section  -->
+<div class="w3-row" style='margin:auto'>
+
+
+    <div class='s1 m2 w3-container w3-col w3-container ;'>
+    </div>
+    
+    <div class='s10 m8 w3-container w3-margin-bottom w3-col w3-container  'style='height:120px;'>
+
+      <div class='w3-row w3-col'>
+       <h2 class='piff'><span>Business</span></h2>
+        <div class="w3-row w3-margin">
+          <div class='w3-col m4'>
+            <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
+          </div>
+          <div class='w3-container w3-col m8'>
+            <h6 style='display:inline'><strong>bucnhawords more words more words more words mowre words more 
+            </strong></h6>
+            <span class='section-subtitle' style='margin-top: -10px;'> let's throw more words in there for a subtitle, and let's make it a bit bigger and stuff</span>
+          </div>
+      </div>
+
+      <div class="w3-row w3-margin">
+        <div class='w3-col m4'>
+          <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
+        </div>
+        <div class='w3-container w3-col m8'>
+          <h6 style= 'display:inline' ><strong> bucnhawords more words more words more words mowre words more 
+          </strong></h6>
+          <span class='section-subtitle' style='margin-top: -10px;'> let's throw more words in there for a subtitle, and let's make it a bit bigger and stuff</span>
+        </div>
+      </div>
+    </div>
+
+    <div class='w3-row w3-col'>
+       <h2 class='piff'><span>Business</span></h2>
+        <div class="w3-row w3-margin">
+          <div class='w3-col m4'>
+            <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
+          </div>
+          <div class='w3-container w3-col m8'>
+            <h6 style='display:inline'><strong>bucnhawords more words more words more words mowre words more 
+            </strong></h6>
+           
+        </div>
+      </div>
+
+      <div class="w3-row w3-margin">
+        <div class='w3-col m4'>
+          <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
+        </div>
+        <div class='w3-container w3-col m8'>
+          <h6><strong>bucnhawords more words more words more words mowre words more 
+          </strong></h6>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class='s1 m2 w3-container w3-col w3-container '>
+  </div>
+
+</div>
+<!-- end 'sections' section -->
+
+
+
+
+
+
 
 
 </div>

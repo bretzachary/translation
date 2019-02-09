@@ -7,7 +7,7 @@ what does it mean to be a content aggregator? platform. classpass? spotify?
 collectivize subscriptions?
 	person A buys NYT, person B WSJ
 	they share articles. subscritions are 'grouped'
-	maybe enforce that each user has a subcription to *a publication
+	maybe enforce that each user has a subcription to *a* publication
 	remit payments to publishers proportional to articles read
 	or if they 'pay' then that money goes into a pool that pays publishers
 
@@ -26,14 +26,22 @@ blogs <- might be easiest ppl to reach out to (for licensing)
 
 
 to do:
-user_page('profile')  - can just start with articles read. maybe an optional button for 'read whole article/did not read whole article' would be a start.<-button can go at end of article. no need to annouce it elsewhere. boolean model field
-accounts - articles read, vocab_stuff,  ?(achievements)
+sections dropdown - should be static (in the html), not dynamic(generated in view)
+paywall page needs link to signup/login
+form for entering docs: permission = superuser
+[publisher]
+[title]
+[subtitle]
+[author]
+?[date published]
+[date submitted (auto now add)]
+[text (textfield)]
+[image]
+[image caption]
+[image]
+[image caption]
+...
 
-subscritions:
-the athletic
-wsj
-nytimes
-washpo
 
 ---
 before deploy: don't forget to get SSL(?) certificate (explained in gunicorn/django/virtualenv/etc setp tutorial).
@@ -44,7 +52,10 @@ periodically run a (is it a routine? - cron job? celery task?) that will update 
 in the new environment. with new technology. the world we live in today. would traditional news look how it does now if it were just invented? of course not. so let's help it adapt to new environment. legacy news is just that - legacy.
 
 maybe make totally free.
-you need an invite to join. one invite per person. ask for sponsorships/donations.
+you need an invite to join. one invite per person.
+ask for sponsorships/donations. i can embed ads. donations go to hosting, articles.
 active email to participate.
 need to re-up the email to make sure it is active. and can solicit more donations from there.
 maybe for each 'membership', a kid gets a 'membership' too.
+
+http://nymag.com/intelligencer/2019/02/new-york-times-subscription-revenue-is-mixed-news-for-media.html
