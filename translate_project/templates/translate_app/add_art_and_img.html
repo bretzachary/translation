@@ -1,0 +1,43 @@
+{% extends 'translate_app/base.html' %}
+{% load staticfiles %}
+
+{%block body_block %}
+
+	<p> add an article </a>
+
+    <form id='login_form' method='post' action="{% url 'add_art_and_img' %}">
+      {% csrf_token %}
+
+	  {{article_form.as_p}}
+
+</br>
+	  Image_1 link: <input type="text" name="img1"/>
+	  Image_1 caption: <input type="text" name="caption1"/>
+</br>
+	  Image_2 link: <input type="text" name="img2"/>
+	  Image_2 caption: <input type="text" name="caption2"/>
+</br>
+	  Image_3 link: <input type="text" name="img3"/>
+	  Image_3 caption: <input type="text" name="caption3"/>
+</br>
+	  Image_4 link: <input type="text" name="img4"/>
+	  Image_4 caption: <input type="text" name="caption4"/>
+</br>
+	  Image_5 link: <input type="text" name="img5"/>
+	  Image_5 caption: <input type="text" name="caption5"/>
+</br>
+	  Image_6 link: <input type="text" name="img6"/>
+	  Image_6 caption: <input type="text" name="caption6"/>
+</br>
+	  Image_7 link: <input type="text" name="img7"/>
+	  Image_7 caption: <input type="text" name="caption7"/>
+
+</br>
+	  <input type="submit" name="submit" value="submit" />
+
+
+    </form>
+
+    
+
+{% endblock %}

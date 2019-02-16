@@ -1,14 +1,116 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from translate_app.models import Article, Image, ArticleViews
-from .forms import UserForm
+from translate_app.models import Article, Image, ArticleViews, ArticleWords, RegistrationCode
+from .forms import UserForm, ArticleForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import os
 import json
 from . import translate
 from .vocab import views_bit
+from .vocab2 import update_articlewords
+import requests
+from random import sample
+from .registration_code_generator import generate
+
+
+def add_art_and_img(request):
+
+	if request.method == "POST":
+		form = ArticleForm(data=request.POST)
+		if form.is_valid():
+			article = form.save()
+		else:
+			print(form.errors)
+		#article = form.save()
+
+		text = article.text.splitlines()
+		text = list(filter(None, text))
+		article.text = json.dumps(text)
+
+		translated_text = article.translated_text.splitlines()
+		translated_text = list(filter(None, translated_text))
+		article.translated_text = json.dumps(translated_text)
+		#
+		#text = text.splitlines()
+		#text = list(filter(None, text))
+		#article.text = json.dumps(text)
+
+
+		article.save()
+		
+		images = []
+	
+		if request.POST.get('img1'):
+			image1 = request.POST.get('img1')
+			caption1 = request.POST.get('caption1')
+			images.append((image1, caption1))
+
+		if request.POST.get('img2'):
+			image2 = request.POST.get('img2')
+			caption2 = request.POST.get('caption2')
+			images.append((image2, caption2))
+
+		if request.POST.get('img3'):
+			image3 = request.POST.get('img3')
+			caption3 = request.POST.get('caption3')
+			images.append((image3, caption3))
+
+		if request.POST.get('img4'):
+			image4 = request.POST.get('img4')
+			caption4 = request.POST.get('caption4')
+			images.append((image1, caption1))
+
+		if request.POST.get('img5'):
+			image5 = request.POST.get('img5')
+			caption5 = request.POST.get('caption5')
+			images.append((image5, caption5))
+
+		if request.POST.get('img6'):
+			image6 = request.POST.get('img6')
+			caption6 = request.POST.get('caption6')
+			images.append((image6, caption6))
+
+		if request.POST.get('img7'):
+			image7 = request.POST.get('img7')
+			caption7 = request.POST.get('caption7')
+			images.append((image7, caption7))
+	
+		number_of_images = len(images)
+		
+		print(number_of_images)
+		print(images)
+
+		os.mkdir('media/articles/{}'.format(article.slug))
+		os.mkdir('media/articles/{}/images'.format(article.slug))
+		
+		for i in range(number_of_images):
+				x = i+1 #media files seem to be unopen-able with filename 0.jpg
+				with open(os.path.join(os.getcwd(), 'media/articles/{}/images/{}.jpg'.format(article.slug, str(x))), 'wb') as f:
+					f.write(requests.get(images[i][0]).content)
+
+				image = Image(article=article)
+				image.picture = 'articles/{}/images/{}.jpg'.format(article.slug, str(x))
+				if images[i][1]:
+					image.caption = images[i][1]
+
+				image.save()
+
+		update_articlewords(article)
+		try:
+			print(article.articlewords.all_words)
+		except:
+			print('COULDNT DO THAT')
+
+		return HttpResponseRedirect(reverse('article_page', args=[article.slug]))
+	
+	article_form = ArticleForm()
+
+	return render(request, 'translate_app/add_art_and_img.html', {'article_form': article_form})
+
+def template_test(request):
+	return render(request, 'translate_app/header.html')
 
 @login_required
 def user_logout(request): 
@@ -23,11 +125,6 @@ def restricted(request):
 
 def user_login(request):
 
-	print("request.user:")
-	print(request.user)
-	print("request.user.is_authenticated:")
-	print(request.user.is_authenticated)
-
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -38,21 +135,17 @@ def user_login(request):
 			if user.is_active:
 				login(request, user)
 
-				print("request.user:")
-				print(request.user)
-				print("request.user.is_authenticated:")
-				print(request.user.is_authenticated)
-
 				return HttpResponseRedirect(reverse('index'))
 		
 			else:
 				HttpResponse('your account has been disabled')
 
 		else:
+			return HttpResponse('invalid credentials. please try logging in again.')
 			print("Invalid login details: {0}, {1}".format(username, password))
 	else:
 
-		return render(request, 'translate_app/login.html', {})
+		return render(request, 'translate_app/login_template.html', {})
 
 @login_required
 def user_page(request):
@@ -65,12 +158,22 @@ def user_page(request):
 	user = request.user
 	articles_viewed = user.article_set.distinct()
 	context_dict={'articles':articles_viewed}
-	return render(request, 'translate_app/user_page.html',context_dict)
+	return render(request, 'translate_app/user_page_template.html',context_dict)
 
 def register(request):
 	registered = False
+	registration_code = RegistrationCode.objects.get(pk=1)
 
 	if request.method == 'POST':
+
+		if request.POST.get('code') == registration_code.code:
+			print(registration_code)
+			registration_code.code = generate()
+			registration_code.save()
+			print(registration_code)
+		else:
+			return HttpResponse('bad code!')
+
 		user_form = UserForm(data=request.POST)
 		if user_form.is_valid():
 			user=user_form.save()
@@ -83,7 +186,7 @@ def register(request):
 		user_form = UserForm()
 
 	context_dict = {'user_form': user_form, 'registered': registered}
-	return render(request, 'translate_app/register.html', context=context_dict)
+	return render(request, 'translate_app/register_template.html', context=context_dict)
 
 def index(request, link = None):
 
@@ -97,12 +200,13 @@ def index(request, link = None):
 		featured.img = img.picture
 		featured_articles_list.append(featured)
 
-	main_article = Article.objects.get(id=13)
+	main_article = Article.objects.get(id=44)
 	img = Image.objects.filter(article=main_article)[0]
 	main_article.img = img.picture
 
 	first_featured_articles_column =[]
-	two_featured_articles = Article.objects.all()[:2]
+	#two_featured_articles = Article.objects.all()[:2]
+	two_featured_articles = Article.objects.all().order_by('-id')[:2]
 	for featured in two_featured_articles:
 		img = Image.objects.filter(article=featured)[0]
 		featured.img = img.picture
@@ -138,8 +242,9 @@ def index(request, link = None):
 			section = Section()
 			section.name=section_name
 			section.articles=[]
-			articles=Article.objects.filter(section=section_name)
+			articles=Article.objects.filter(section=section_name)[:4]
 			for article in articles:
+				article.image = article.image_set.first().picture
 				section.articles.append(article)
 			list_of_sections.append(section)
 		return list_of_sections
@@ -150,7 +255,7 @@ def index(request, link = None):
 
 	context_dict = {'articles': articles, 'main_article': main_article, 'first_featured_articles_column':first_featured_articles_column, 'second_featured_articles_column':second_featured_articles_column, 'featured_articles_list':featured_articles_list, 'sections':sections}
 
-	return render(request, 'translate_app/front_page_ringer_design.html', context=context_dict)
+	return render(request, 'translate_app/front_page_template.html', context=context_dict)
 
 
 #	def track_article_pageviews(request):
@@ -214,7 +319,7 @@ def section_page(request, section):
 	for article in articles:
 		article.img = article.image_set.first()
 	context_dict = {'articles':articles, 'section':section}
-	return render(request, 'translate_app/section_page.html', context=context_dict)
+	return render(request, 'translate_app/section_page_template.html', context=context_dict)
 
 
 
@@ -371,27 +476,48 @@ def article_page_with_paywall(request, slug):
 		skip_factor = int(len(paragraph_container)/len(images))
 		for i in range(len(images)):
 			index_position = i*skip_factor
-			paragraph_container.insert(index_position, str(images[i].picture))
+
+			visual=Test()
+			visual.picture = str(images[i].picture)
+			visual.caption = images[i].caption
+			paragraph_container.insert(index_position, visual)
+			print('LLLL' + visual.picture)
+			#paragraph_container.insert(index_position, str(images[i].picture))
 
 	else:
-		paragraph_container.insert(0, images[0].picture)
+
+		visual=Test()
+		visual.picture = str(images[0].picture)
+		visual.caption = images[0].caption
+		paragraph_container.insert(0, visual)
+		print('345345345 ' + visual.picture)
+
+		#paragraph_container.insert(0, images[0].picture)
 
 
 	context_dict={}
-	context_dict['vocab'] = views_bit(article)
+	
+	vocab = ArticleWords.objects.get(article=article).most_common_words
+	vocab = json.loads(vocab)
+	vocab = sample(vocab, 20)
+
 	paragraph_count = len(paragraph_container)
 
 	if request.user.is_authenticated:
 		ArticleViews.objects.create(article=article, user=request.user)
 
 		context_dict={'paragraph_container':paragraph_container, 'article':article, 'images':images, 'paragraph_count':paragraph_count}
-	
-		return render(request, 'translate_app/article_page_redesign.html', context=context_dict)
+		#context_dict['vocab'] = views_bit(article)
+		context_dict['vocab'] = vocab
+
+		return render(request, 'translate_app/article_page_redesign_template.html', context=context_dict)
 
 	else:
-		title_img = paragraph_container[0]
+		#title_img = paragraph_container[0]
+		title_img = paragraph_container[0].picture
 		paragraph_container = paragraph_container[1:5]
 
 		context_dict={'paragraph_container':paragraph_container, 'title_img':title_img,'article':article, 'images':images, 'paragraph_count':paragraph_count}
-
-		return render(request, 'translate_app/article_paywall.html', context=context_dict)
+		#context_dict['vocab'] = views_bit(article)
+		context_dict['vocab'] = vocab
+		return render(request, 'translate_app/article_paywall_template.html', context=context_dict)

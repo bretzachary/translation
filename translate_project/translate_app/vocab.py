@@ -1,3 +1,5 @@
+#this will be replaced by vocab2.py
+
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'translate_project.settings') 
 import django
@@ -35,7 +37,7 @@ def views_bit(article):
 	#to generate word_list for context_dict
 	unique_words_in_article = json.decoder.JSONDecoder().decode(article.articlewords.all_words)
 	unique_words_in_article = set(find_ngrams(unique_words_in_article,1))
-
+	
 	with open('_800_most_common_words.txt', encoding='utf-8') as doc:
 		most_common_words = set([line.strip() for line in doc]) #taking set because of a few duplicates
 

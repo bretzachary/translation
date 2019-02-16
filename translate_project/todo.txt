@@ -1,7 +1,75 @@
 (also) pip install requests, bs4, pillow, google
 https://longreads.com/2019/01/22/the-heartbeat-of-wounded-knee/
 
-ideas:
+
+think about katerra
+read about them in an article on crunchbase
+then learned about them in article from nytimes
+
+so maybe theres value in a platform that links to all things sobre company X.
+crunchbase kinda has this at the bottom for their company profile pages.
+hmm..
+maybe more like a search engine/platform for news. but then google has a news search function
+so maybe get people's preferences and be their platform for the news or whatver on their favorite topics.
+
+i could implement this myself if i get more thorough with tags. then recommend things
+
+index for news
+best sources, reputable sources etc
+just links
+
+
+to do:
+
+subtitles on various pages. if no subtitle (maybe that means if subtitle = ''), leave empty
+	index
+	article
+	section
+	
+
+for the hidden menu logo icon for small screens:
+	instead of 'hide' can it be removed?
+
+form for entering docs: permission = superuser
+
+
+changes made in 2:
+	Article model fields (a few changes here) + def save
+		problems migrating? comment out contents of ngrams file
+	Form
+	Add_Article view, Add_Image view
+	tempate(add_article.html, add_image.html)
+	urls
+	
+	!commented out the following from article_page_with_paywall, twice:
+		#context_dict['vocab'] = views_bit(article)
+
+	'add_art_and_img' view and html
+	added captions to article_page_redesign_template
+	
+	removed 'translated_text' from 'exclude' field of forms.py
+
+
+form for entering docs: permission = superuser
+
+
+---
+before deploy: don't forget to get SSL(?) certificate (explained in gunicorn/django/virtualenv/etc setp tutorial).
+
+periodically run a (is it a routine? - cron job? celery task?) that will update the '_800_most_common_words.txt' file and also populate each articlewords model with correct most_common_words-field data. again, so that it is not computed on the fly as is currently done with the 'views bit' function and can instead just be a model query.
+
+
+in the new environment. with new technology. the world we live in today. would traditional news look how it does now if it were just invented? of course not. so let's help it adapt to new environment. legacy news is just that - legacy.
+
+maybe make totally free.
+you need an invite to join. one invite per person.
+ask for sponsorships/donations. i can embed ads. donations go to hosting, articles.
+active email to participate.
+need to re-up the email to make sure it is active. and can solicit more donations from there.
+maybe for each 'membership', a kid gets a 'membership' too.
+
+this article exactly
+http://nymag.com/intelligencer/2019/02/new-york-times-subscription-revenue-is-mixed-news-for-media.html
 
 what does it mean to be a content aggregator? platform. classpass? spotify?
 collectivize subscriptions?
@@ -13,6 +81,7 @@ collectivize subscriptions?
 
 survey/get reader info when signup (where from. howlong studying? are they a regular reader of any of papers (this last point can be used to drive value. especially on the 'learn english' site. englisht that is translated back to them.ie, readers who otherwise would not read these sources -spanish readers etc.))
 
+ideas:
 maybe categoriza vcab by importance (frequency)
 same as above - with definitions at top of articles. sort of a 'what to expect' section.
 
@@ -23,39 +92,3 @@ recently read articles
 don't forget about a/b testing
 harvard business review articles
 blogs <- might be easiest ppl to reach out to (for licensing)
-
-
-to do:
-sections dropdown - should be static (in the html), not dynamic(generated in view)
-paywall page needs link to signup/login
-form for entering docs: permission = superuser
-[publisher]
-[title]
-[subtitle]
-[author]
-?[date published]
-[date submitted (auto now add)]
-[text (textfield)]
-[image]
-[image caption]
-[image]
-[image caption]
-...
-
-
----
-before deploy: don't forget to get SSL(?) certificate (explained in gunicorn/django/virtualenv/etc setp tutorial).
-
-periodically run a (is it a routine? - cron job? celery task?) that will update the '_800_most_common_words.txt' file and also populate each articlewords model with correct most_common_words-field data. again, so that it is not computed on the fly as is currently done with the 'views bit' function and can instead just be a model query.
-
-'media' is dying. that is a good thing. we want to accelerate that. to help that to happen. logan green quote about seeing the future. what unexpected good things will come from the consolidation. the good ones will become stronger.
-in the new environment. with new technology. the world we live in today. would traditional news look how it does now if it were just invented? of course not. so let's help it adapt to new environment. legacy news is just that - legacy.
-
-maybe make totally free.
-you need an invite to join. one invite per person.
-ask for sponsorships/donations. i can embed ads. donations go to hosting, articles.
-active email to participate.
-need to re-up the email to make sure it is active. and can solicit more donations from there.
-maybe for each 'membership', a kid gets a 'membership' too.
-
-http://nymag.com/intelligencer/2019/02/new-york-times-subscription-revenue-is-mixed-news-for-media.html

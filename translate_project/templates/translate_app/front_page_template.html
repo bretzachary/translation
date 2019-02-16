@@ -1,0 +1,140 @@
+{% extends 'translate_app/base.html' %}
+{% load staticfiles %}
+
+{%block body_block %}
+
+<div id='main_container' style='max-width:1050px; margin:auto' class='article-container'>
+
+<!--'above-the-fold' section -->
+<div class="w3-row-padding">
+  
+  <!--featured article-->
+  <div class="w3-col  m6 w3-container">
+    <div class='w3-margin'>
+        <a href="{% url 'article_page' main_article.slug %}">
+            <img class='w3-image' src='{{ MEDIA_URL }}{{main_article.img}}'>
+      </a>
+      <a href="{% url 'article_page' main_article.slug %}">
+            <h2> <strong> {{main_article.title}} </strong></h2>
+      </a>
+      <a href="{% url 'article_page' main_article.slug %}">
+        <p> {{main_article.subtitle}}</p>
+        <p> {{main_article.author}} </p>
+      </a>
+ 
+    </div>
+  </div>
+  <!--end featured article -->
+  
+  <div class="w3-col m3 w3-container article-container">
+
+    {% for featured in first_featured_articles_column %}
+
+    <div class='w3-margin-top '>
+      <a href="{% url 'article_page' featured.slug %}">
+            <img class='w3-image' src='{{ MEDIA_URL }}{{featured.img}}'>
+      </a>
+      <h4> <strong>
+        <a href="{% url 'article_page' featured.slug %}">{{featured.title}}</a>
+      </strong></h4>
+        <p> {{featured.subtitle}}</p>
+        <p> {{featured.author}} </p>
+    </div>
+
+    {% endfor %}
+    
+    
+  </div>
+  
+  <div class=" w3-col m3 w3-container">
+
+    {% for featured in second_featured_articles_column %}
+
+    <div class='w3-margin-top '>
+      <a href="{% url 'article_page' featured.slug %}">
+            <img class='w3-image' src='{{ MEDIA_URL }}{{featured.img}}'>
+      </a>
+      <h4> <strong>
+        <a href="{% url 'article_page' featured.slug %}">{{featured.title}}</a>
+      </strong></h4>
+      <p> 
+        can't gorget the subtitle. let's see how much this adds to the div
+      </p>
+      <p> author name</p>
+    </div>
+
+    {% endfor %}
+
+
+  </div>
+
+</div>
+<!--'above-the-fold' section -->
+
+
+
+<div class= 'w3-border-top w3-margin-bottom' ></div>
+
+<div class="w3-row" style='margin:auto'>
+    <div class='s2 w3-container w3-col w3-container ;'>
+    </div>
+    <div class='s8 w3-border w3-border-black w3-container w3-margin-bottom w3-col w3-container w3-gray 'style='height:120px;'> jgkhv
+    </div>
+    <div class='s2 w3-container w3-col w3-container '>
+    </div>
+</div>
+
+<div class= 'w3-border-top  w3-margin-bottom ' ></br></div>
+
+
+<!-- 'sections' section  -->
+<div class="w3-row" style='margin:auto'>
+
+    <!--empty 'left' column -->
+    <div class='s1 m2 w3-container w3-col w3-container ;'>
+    </div>
+    
+    <!-- middle 'content' column -->
+    <div class='s10 m8 w3-container w3-margin-bottom w3-col w3-container  'style='height:120px;'>
+      {% for section in sections%}
+      <!--section row -->
+      <div class='w3-row w3-col'>
+       <h2 class='piff'>
+        <span class='w3-pale-red'>
+          <a href="{% url 'section_page' section.name %}">{{section.name}}</a>
+        </span>
+      </h2>
+
+       <!--article row -->
+       {% for article in section.articles %}
+        <div class="w3-row w3-margin">
+          <div class='w3-col m4'>
+            <a href="{% url 'article_page' article.slug %}">
+              <img class='w3-image' src="{{ MEDIA_URL }}{{article.image}}">
+            </a>
+          </div>
+          <div class='w3-container w3-col m8'>
+            <h6 style='display:inline'>
+              <strong>
+                <a href="{% url 'article_page' article.slug %}">{{article.title}}</a>
+              </strong>
+            </h6>
+            <span class='section-subtitle' style='margin-top: -10px;'> {{article.subtitle}}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+   
+    </div>
+
+  <div class='s1 m2 w3-container w3-col w3-container '>
+  </div>
+
+</div>
+<!-- end 'sections' section -->
+
+</div>
+<!-- end of 'main container' -->
+
+{% endblock %}

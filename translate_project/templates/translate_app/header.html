@@ -1,0 +1,58 @@
+
+{% extends 'translate_app/base.html' %}
+{% load staticfiles %}
+
+{% block header_block %}
+
+<div class='w3-black'>
+  <div class="w3-container w3-row w3-padding-24" style='max-width:1050px; margin:auto'>
+
+    <h3 class='w3-left'>Displaying Colors</h3>
+    <h5 class=' right-header-item w3-right w3-margin '>logout</h5>  
+    <h5 class='right-header-item w3-right w3-margin '> my account </h5>  
+
+    <div class="w3-dropdown-hover w3-right">
+      <button class="w3-button ">
+        <h3><i  class=" menu-logo fa fa-bars"></i></h3>
+      </button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4 ">
+        <a href="#" class="w3-bar-item w3-button">Logout</a>
+        <a href="#" class="w3-bar-item w3-button">My Account</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class='w3-pale-red'>
+<div class="w3-center right-header-item w3-bar w3-pale-red" style='max-width:1050px; margin:auto'>
+  <a href="#" class="w3-bar-item w3-button">Business</a>
+  <a href="#" class="w3-bar-item w3-button">Science</a>
+  <a href="#" class="w3-bar-item w3-button">Technology</a>
+  <a href="#" class="w3-bar-item w3-button">Sports</a>
+  <a href="#" class="w3-bar-item w3-button">Wellness</a>
+  <a href="#" class="w3-bar-item w3-button">New York</a>
+  <a href="#" class="w3-bar-item w3-button">Culture</a>
+  <a href="#" class="w3-bar-item w3-button">Movies</a>
+</div>
+</div>
+
+  <div class="menu-logo w3-dropdown-hover w3-mobile w3-bar-item w3-pale-red">
+    <button class="w3-button ">
+        Sections
+    </button>
+    <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pale-red">
+      <a href="#" class="w3-bar-item w3-button">Cooking</a>
+      <a href="#" class="w3-bar-item w3-button">Gaming</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- used in testing to create space below header
+<div style='height:600px'>
+</div>
+
+
+{% endblock %}
+

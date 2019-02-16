@@ -1,0 +1,14 @@
+{% extends 'translate_app/base.html' %}
+{% load staticfiles %}
+
+{%block body_block %}
+
+	<h3>My reading history:</h3>
+
+
+		{%for article in articles %}
+		{{article.title}}
+		</br>
+		{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'translate_app/base.html' %}
+{% load staticfiles %}
+
+{%block body_block %}
+
+</br>
+
+<div class="w3-row">
+  <div class="w3-col m4 l3 w3-border-right w3-padding w3-large"style="height:400px",>
+    <p>12 columns on a small screen, 4 on a medium screen, and 3 on a large screen.</p>
+
+    {% for word in vocab %}
+    <p>{{word}}</p>
+    {% endfor %}
+
+  </div>
+
+  <div class="w3-col m8 l7 w3-padding">
+
+    <h4>{{article.publisher}}</h4>
+    <strong><h2>{{article.title}}</h2></strong>
+
+    <div> By: {{article.author}} </div>
+        </br>
+
+    {% for para in paragraph_container %}
+      {% if para.text %}
+        <div class='w3-large'>
+          <p title="{{para.text|safe}}">{{para.trans|safe}} </p>
+        </div>
+      {% else %}
+
+<!--
+        <p>
+        <img class ='w3-image' src='{{MEDIA_URL}}{{para}}'/>
+        <p>
+-->
+
+        <!--added captions -->
+        <p>
+        <img class ='w3-image' src='{{MEDIA_URL}}{{para.picture}}'/>
+        <p>
+          <div class='w3-light-grey w3-small'> {{para.caption}}</div>
+        </br>
+        <!--end added captions -->
+
+
+      {% endif %}
+    {% endfor %}
+
+
+  </div>
+
+  <div class="w3-col l2">
+  </div>
+
+{% endblock %}

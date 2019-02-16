@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
+
+
+
+<!--removed this from style. it seemed to affect only main featured article
+h2 {
+  margin-top: -14px;
+  line-height: 32px;
+}
+-->
+
+<style>
+
+
+@media all and (max-width:460px) {
+  .right-header-item { display: none; }
+}
+
+@media all and (min-width:460px) {
+  .menu-logo { display: none }
+}
+
+
+
+<!--from front page design-->
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+}
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+p {
+  margin-top: -7px;
+}
+h2{
+  line-height: 32px;
+}
+h4{line-height: 24px;
+}
+
+a:link {
+    text-decoration: none;
+}
+p .header-p{
+  all: initial;
+}
+.piff { width:100%; text-align:center; border-bottom: 4px solid #000; line-height:0.1em; margin:10px 0 20px; } 
+h2 span { background:#fff; padding:0 10px; }
+
+@media all and (min-width:600px) and (max-width: 800px) {
+  .section-subtitle { display: none; }
+}
+</style>
+<!--from front page design -->
+
+
+
+<body>
+
+<!--start header -->
+<div class='w3-black'>
+  <div class="w3-container w3-row w3-padding-24" style='max-width:1050px; margin:auto'>
+
+    <h3 class='w3-left'>
+      <a href="{% url 'index' %}"> Website Name </a>
+    </h3>
+
+    {% if user.is_authenticated %}
+    <h5 class=' right-header-item w3-right w3-margin '>
+      <a href="{% url 'logout' %}"> logout </a>
+    </h5>  
+    <h5 class='right-header-item w3-right w3-margin '>
+      <a href="{% url 'user_page' %}"> my account </a>
+    </h5>
+    {% else %}
+    <h5 class=' right-header-item w3-right w3-margin '>
+      <a href="{% url 'register' %}"> sign up </a>
+    </h5>  
+    <h5 class='right-header-item w3-right w3-margin '>
+      <a href="{% url 'login' %}"> login </a>
+    </h5>
+    {% endif %}   
+
+    <div class="w3-dropdown-hover w3-right">
+      <button class="menu-logo w3-button ">
+        <h3><i  class="fa fa-bars"></i></h3>
+      </button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4 ">
+
+      {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="w3-bar-item w3-button" style="position:relative; left:-75px">Logout</a>
+          <a href="#" class="w3-bar-item w3-button" style="position:relative; left:-75px">My Account</a>
+      {% else %}
+          <a href="#" class="w3-bar-item w3-button" style="position:relative; left:-75px">signup</a>
+          <a href="{% url 'login' %}" class="w3-bar-item w3-button" style="position:relative; left:-75px">login</a>
+      {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class='w3-pale-red'>
+<div class="w3-center right-header-item w3-bar w3-pale-red" style='max-width:1050px; margin:auto'>
+  <a href="{% url 'section_page' 'business'%}" class="w3-bar-item w3-button">Business</a>
+  <a href="{% url 'section_page' 'science'%}" class="w3-bar-item w3-button">Science</a>
+  <a href="{% url 'section_page' 'technology'%}" class="w3-bar-item w3-button">Technology</a>
+  <a href="{% url 'section_page' 'sports'%}" class="w3-bar-item w3-button">Sports</a>
+  <a href="{% url 'section_page' 'wellness'%}" class="w3-bar-item w3-button">Wellness</a>
+  <a href="{% url 'section_page' 'nyregion'%}" class="w3-bar-item w3-button">NYRegion</a>
+  <a href="{% url 'section_page' 'culture'%}" class="w3-bar-item w3-button">Culture</a>
+  <a href="{% url 'section_page' 'movies'%}" class="w3-bar-item w3-button">Movies</a>
+</div>
+</div>
+
+  <div class="menu-logo w3-dropdown-hover w3-mobile w3-bar-item w3-pale-red">
+    <button class="w3-button ">
+        Sections
+    </button>
+    <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pale-red">
+      <a href="#" class="w3-bar-item w3-button">Cooking</a>
+      <a href="#" class="w3-bar-item w3-button">Gaming</a>
+    </div>
+  </div>
+
+</div>
+  <!-- used in testing to create space below header
+  <div style='height:600px'>
+  </div>
+  -->
+
+
+<!--end header -->
+
+{% block body_block %}
+{% endblock %}
+
+
+</body>
+</hmtl>

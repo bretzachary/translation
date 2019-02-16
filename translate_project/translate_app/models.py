@@ -1,20 +1,28 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.template.defaultfilters import slugify
 
 def user_directory_path(instance, filename):
 	return 'articles/{}/images/filename'.format(instance.article.slug)
 
 class Article(models.Model):
-	publisher = models.CharField(max_length=128, default='nytimes')
+	
 	url = models.URLField()
-	title = models.CharField(max_length=512, unique=True)
-	slug = models.SlugField(max_length=512)
-	date = models.DateField(auto_now=True)
-#	author = models.CharField()
-	text = models.TextField()
-	translated_text = models.TextField()
 	section = models.CharField(max_length=128, null=True)
+	publisher = models.CharField(max_length=128, default='nytimes')
+	title = models.CharField(max_length=512, unique=True)
+	subtitle = models.CharField(max_length=512, null=True)
+	slug = models.SlugField(max_length=512)
+	author = models.CharField(max_length=128, null=True)
+	date = models.DateField(auto_now=True)
+	text = models.TextField()
+	translated_text = models.TextField(null=True)
+	
 	readers = models.ManyToManyField(User,through='ArticleViews', blank=True, null=True)
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.title)
+		super(Article, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.title
@@ -44,6 +52,12 @@ class ArticleWords(models.Model):
 	all_words = models.TextField()
 	most_common_words = models.TextField()
 	tfidf_words = models.TextField()
+
+class RegistrationCode(models.Model):
+	code = models.CharField(max_length=128)
+
+	def __str__(self):
+		return self.code
 
 #class Section(models.Model):
 #	article = models.ManyToManyField(Article)

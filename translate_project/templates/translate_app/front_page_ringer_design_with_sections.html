@@ -31,7 +31,6 @@ p .header-p{
   all: initial;
 }
 
-
 .piff { width:100%; text-align:center; border-bottom: 4px solid #000; line-height:0.1em; margin:10px 0 20px; } 
 h2 span { background:#fff; padding:0 10px; }
 
@@ -84,8 +83,10 @@ h2 span { background:#fff; padding:0 10px; }
 
 <div id='main_container' style='max-width:1050px; margin:auto' class='article-container'>
 
+<!--'above-the-fold' section -->
 <div class="w3-row-padding">
   
+  <!--featured article-->
   <div class="w3-col  m6 w3-container">
     <div class='w3-margin'>
         <a href="{% url 'article_page' main_article.slug %}">
@@ -98,10 +99,10 @@ h2 span { background:#fff; padding:0 10px; }
         <p> well these can be fairly long. i'd say i expect them to be longer than the title, even. One sentence, or two, they add a bit more story to the heading. </p>
         <p> by penny wise </p>
       </a>
-
-        
+ 
     </div>
   </div>
+  <!--end featured article -->
   
   <div class="w3-col m3 w3-container article-container">
 
@@ -148,7 +149,7 @@ h2 span { background:#fff; padding:0 10px; }
   </div>
 
 </div>
-
+<!--'above-the-fold' section -->
 
 
 
@@ -175,61 +176,33 @@ h2 span { background:#fff; padding:0 10px; }
     
     <!-- middle 'content' column -->
     <div class='s10 m8 w3-container w3-margin-bottom w3-col w3-container  'style='height:120px;'>
-
+      {% for section in sections%}
       <!--section row -->
       <div class='w3-row w3-col'>
-       <h2 class='piff'><span>Business</span></h2>
+       <h2 class='piff'><span class='w3-pale-red'>{{section.name}}</span></h2>
 
        <!--article row -->
+       {% for article in section.articles %}
         <div class="w3-row w3-margin">
           <div class='w3-col m4'>
-            <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
+            <a href="{% url 'article_page' article.slug %}">
+              <img class='w3-image' src="{{ MEDIA_URL }}{{article.image}}">
+            </a>
           </div>
           <div class='w3-container w3-col m8'>
-            <h6 style='display:inline'><strong>bucnhawords more words more words more words mowre words more 
-            </strong></h6>
-            <span class='section-subtitle' style='margin-top: -10px;'> let's throw more words in there for a subtitle, and let's make it a bit bigger and stuff</span>
+            <h6 style='display:inline'>
+              <strong>
+                <a href="{% url 'article_page' article.slug %}">{{article.title}}</a>
+              </strong>
+            </h6>
+            <span class='section-subtitle' style='margin-top: -10px;'> {{article.title}}</span>
           </div>
         </div>
-
-       <!--article row -->
-      <div class="w3-row w3-margin">
-        <div class='w3-col m4'>
-          <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
-        </div>
-        <div class='w3-container w3-col m8'>
-          <h6 style= 'display:inline' ><strong> bucnhawords more words more words more words mowre words more 
-          </strong></h6>
-          <span class='section-subtitle' style='margin-top: -10px;'> let's throw more words in there for a subtitle, and let's make it a bit bigger and stuff</span>
-        </div>
+        {% endfor %}
       </div>
+      {% endfor %}
+   
     </div>
-
-    <div class='w3-row w3-col'>
-       <h2 class='piff'><span>Business</span></h2>
-        <div class="w3-row w3-margin">
-          <div class='w3-col m4'>
-            <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
-          </div>
-          <div class='w3-container w3-col m8'>
-            <h6 style='display:inline'><strong>bucnhawords more words more words more words mowre words more 
-            </strong></h6>
-           
-        </div>
-      </div>
-
-      <div class="w3-row w3-margin">
-        <div class='w3-col m4'>
-          <img class='w3-image' src="https://2utfff4d3dkt3biit53nsvep-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/acquisitive_companies-1024x471.png">
-        </div>
-        <div class='w3-container w3-col m8'>
-          <h6><strong>bucnhawords more words more words more words mowre words more 
-          </strong></h6>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
   <div class='s1 m2 w3-container w3-col w3-container '>
   </div>
@@ -237,16 +210,8 @@ h2 span { background:#fff; padding:0 10px; }
 </div>
 <!-- end 'sections' section -->
 
-
-
-
-
-
-
-
 </div>
-
-</div>
+<!-- end of 'main container' -->
 
 </body>
 </html>
