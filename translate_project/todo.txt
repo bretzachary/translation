@@ -1,4 +1,22 @@
+changes to make to live version
+	comment out views and urls except for the template test then migrate
+	populate registration code (initialized with no code)
+	in paywall_page(logged out), create space btwn article img and text
+	auto-login user after registration? 
+	No captions render as 'None'
+	sections
+
+launch
+	release to learn spanish
+	then either /r/learnlanguages OR learnfrench/german/etc
+	ask for mods? admin to uplaod articles
+	maybe that ^ is an ad.
+
+todo
+
 (also) pip install requests, bs4, pillow, google
+for google: pip install --upgrade google-cloud-translate
+
 https://longreads.com/2019/01/22/the-heartbeat-of-wounded-knee/
 
 
@@ -48,10 +66,6 @@ changes made in 2:
 	added captions to article_page_redesign_template
 	
 	removed 'translated_text' from 'exclude' field of forms.py
-
-
-form for entering docs: permission = superuser
-
 
 ---
 before deploy: don't forget to get SSL(?) certificate (explained in gunicorn/django/virtualenv/etc setp tutorial).

@@ -23,6 +23,10 @@
   <div class="w3-col m9 l7 w3-padding">
     <h4>{{article.publisher}}</h4>
     <strong><h2>{{article.title}}</h2></strong>
+    <div> By: {{article.author}} </div>
+    </br>
+
+
     <img class='w3-image' src='{{MEDIA_URL}}{{title_img}}'/>
     <div class='relative' style='width:100%;
 
@@ -30,6 +34,8 @@
       
             height: auto;'
       >
+
+    </br>
 
       {% for para in paragraph_container %}
           <p class='w3-large' title="{{para.text|safe}}" >{{para.trans|safe}} </p>
