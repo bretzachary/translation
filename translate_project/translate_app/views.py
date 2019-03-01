@@ -14,8 +14,9 @@ import requests
 from random import sample
 from .registration_code_generator import generate
 
-
 def add_art_and_img(request):
+	if not request.user.is_superuser:
+		return HttpResponse('must login as superuser')
 
 	if request.method == "POST":
 		form = ArticleForm(data=request.POST)
@@ -110,7 +111,9 @@ def add_art_and_img(request):
 	return render(request, 'translate_app/add_art_and_img.html', {'article_form': article_form})
 
 def template_test(request):
-	return render(request, 'translate_app/header.html')
+#	return render(request, 'translate_app/header.html')
+	print(request.subdomain_language)
+	return HttpResponse(request.subdomain_language)
 
 @login_required
 def user_logout(request): 
@@ -168,8 +171,8 @@ def register(request):
 
 		if request.POST.get('code') == registration_code.code:
 			print(registration_code)
-			registration_code.code = generate()
-			registration_code.save()
+			#registration_code.code = generate()
+			#registration_code.save()
 			print(registration_code)
 		else:
 			return HttpResponse('bad code!')
@@ -189,7 +192,6 @@ def register(request):
 	return render(request, 'translate_app/register_template.html', context=context_dict)
 
 def index(request, link = None):
-
 	articles = Article.objects.all().order_by('-date')
 	featured_articles = Article.objects.all()[:3]
 
@@ -490,7 +492,7 @@ def article_page_with_paywall(request, slug):
 		visual.picture = str(images[0].picture)
 		visual.caption = images[0].caption
 		paragraph_container.insert(0, visual)
-		print('345345345 ' + visual.picture)
+		#print('345345345 ' + visual.picture)
 
 		#paragraph_container.insert(0, images[0].picture)
 
@@ -515,7 +517,7 @@ def article_page_with_paywall(request, slug):
 	else:
 		#title_img = paragraph_container[0]
 		title_img = paragraph_container[0].picture
-		paragraph_container = paragraph_container[1:5]
+		paragraph_container = paragraph_container[1:3]
 
 		context_dict={'paragraph_container':paragraph_container, 'title_img':title_img,'article':article, 'images':images, 'paragraph_count':paragraph_count}
 		#context_dict['vocab'] = views_bit(article)

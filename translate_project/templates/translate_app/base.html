@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 <html>
-<title>W3.CSS</title>
+<title>ReadRoom</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,7 +71,7 @@ h2 span { background:#fff; padding:0 10px; }
   <div class="w3-container w3-row w3-padding-24" style='max-width:1050px; margin:auto'>
 
     <h3 class='w3-left'>
-      <a href="{% url 'index' %}"> Website Name </a>
+      <a href="{% url 'index' %}"> ReadRoom </a>
     </h3>
 
     {% if user.is_authenticated %}
@@ -110,6 +110,7 @@ h2 span { background:#fff; padding:0 10px; }
   </div>
 </div>
 
+
 <div class='w3-pale-red'>
 <div class="w3-center right-header-item w3-bar w3-pale-red" style='max-width:1050px; margin:auto'>
   <a href="{% url 'section_page' 'business'%}" class="w3-bar-item w3-button">Business</a>
@@ -133,7 +134,12 @@ h2 span { background:#fff; padding:0 10px; }
     </div>
   </div>
 
+
+
 </div>
+
+
+
   <!-- used in testing to create space below header
   <div style='height:600px'>
   </div>

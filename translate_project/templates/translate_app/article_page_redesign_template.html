@@ -6,9 +6,9 @@
 </br>
 
 <div class="w3-row">
-  <div class="w3-col m3 l3 w3-border-right w3-padding w3-large"style="height:400px",>
-    <p>12 columns on a small screen, 4 on a medium screen, and 3 on a large screen.</p>
-
+  <div class="w3-col w3-hide-small m3 l3 w3-border-right w3-padding w3-large"style="height:400px",>
+    <h4>Key words from this Article:</h4>
+    </br>
     {% for word in vocab %}
     <p>{{word}}</p>
     {% endfor %}
@@ -30,17 +30,13 @@
         </div>
       {% else %}
 
-<!--
-        <p>
-        <img class ='w3-image' src='{{MEDIA_URL}}{{para}}'/>
-        <p>
--->
-
         <!--added captions -->
         <p>
         <img class ='w3-image' src='{{MEDIA_URL}}{{para.picture}}'/>
-        <p>
+        </p>
+        {% if para.caption != None %}
           <div class='w3-light-grey w3-small'> {{para.caption}}</div>
+        {% endif %}
         </br>
         <!--end added captions -->
 

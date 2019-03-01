@@ -1,18 +1,35 @@
+https://www.webforefront.com/django/configuredjangosettings.html
+
+https://stackoverflow.com/questions/19385443/how-do-i-capture-the-subdomain-in-a-django-url-pattern
+https://micropyramid.com/blog/django-subdomains-to-do-advanced-things/
+https://stackoverflow.com/questions/6925825/get-subdomain-from-url-using-python
+
+sudo certbot --nginx --expand  -d test.readroom.org -d blah.org etc
+
+http://nymag.com/intelligencer/2019/02/is-this-harvard-prototype-the-greenest-building-in-america.html
+http://nymag.com/strategist/article/coravin-model-one-wine-saver-review.html
+
+
+remove gray box
+center from page sections
+secret keys etc passwords (db in settings.py) on github etc.
+restrict add_art_and_img
+
+before deploy: and debug=False. ensure firewalls
+
 changes to make to live version
 	comment out views and urls except for the template test then migrate
 	populate registration code (initialized with no code)
-	in paywall_page(logged out), create space btwn article img and text
-	auto-login user after registration? 
-	No captions render as 'None'
+
+todoene 
 	sections
 
 launch
-	release to learn spanish
+	release to /learnspanish
 	then either /r/learnlanguages OR learnfrench/german/etc
 	ask for mods? admin to uplaod articles
 	maybe that ^ is an ad.
 
-todo
 
 (also) pip install requests, bs4, pillow, google
 for google: pip install --upgrade google-cloud-translate
@@ -67,9 +84,6 @@ changes made in 2:
 	
 	removed 'translated_text' from 'exclude' field of forms.py
 
----
-before deploy: don't forget to get SSL(?) certificate (explained in gunicorn/django/virtualenv/etc setp tutorial).
-
 periodically run a (is it a routine? - cron job? celery task?) that will update the '_800_most_common_words.txt' file and also populate each articlewords model with correct most_common_words-field data. again, so that it is not computed on the fly as is currently done with the 'views bit' function and can instead just be a model query.
 
 
@@ -106,3 +120,11 @@ recently read articles
 don't forget about a/b testing
 harvard business review articles
 blogs <- might be easiest ppl to reach out to (for licensing)
+
+Hey, I'm actually a Spanish language learner but one thing that I've found a ton of success with is to read everyday in Spanish. I read the (american) news avidly and so I started to translate (online) my everyday reading into Spanish to kill two birds with one stone. Did this for about a month and saw how much it worked so I went and created this: readroom.org.
+
+My thing was that I had little motivation for reading native spanish articles/news - I just couldn't get myself interested in the content that I was turning up. Just by regularly reading for about 15-20 each day I've noticed a huge improvement, especially in my vocab. 
+
+I'm just reaching out to you guys to see if there's any interest in doing the same for french. It wouldn't take much effort for me to make a french 'version', but I wouldn't bother if there's no interest.
+
+Oh, I should point out that when you login, you get the ability to hover over text to see the original english (for times when you get stuck on a word or encounter tricky grammar).

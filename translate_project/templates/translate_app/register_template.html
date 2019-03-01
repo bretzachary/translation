@@ -6,23 +6,32 @@
 </br>
 </br>
 
+<style>
+a:link { text-decoration: underline; }
+</style>
+
 <div id='main_container' style='max-width:1050px; margin:auto' class='article-container'>
 
 	<div class='w3-padding-24' style='max-width:450px; margin:auto'>	
 
 		{% if registered %}
-		<div style='max-width:200px;margin:auto'>
-			Registration successful!
+		<div class='w3-center' style='max-width:200px;margin:auto'>
+			<p>Registration successful!</p>
+			<p><a href="{% url 'index' %}">Back to the front page</a></p>
+			<p><a href="{% url 'article_page' 'the-official-fast-food-french-fry-power-rankings' %}">Try a random article</a></p>
+
 		{% else %}
 		
 			<h2> Register </h2>
 
 			</br>
+			<p>Please email me at xxxx@readroom.org to get the registration code!</p>
+			</br>
 
 			<form id='user_form' method='post' action="{% url 'register' %}">
 			{% csrf_token %}
 
-			<label> Registration Code </label>
+			<p><label> Registration Code: </label></p>
 			<p><input class="w3-input w3-border w3-round-large" name="code" type="text"></p>
 
 				{{user_form.as_p}}

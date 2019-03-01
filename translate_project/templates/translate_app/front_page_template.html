@@ -57,10 +57,8 @@
       <h4> <strong>
         <a href="{% url 'article_page' featured.slug %}">{{featured.title}}</a>
       </strong></h4>
-      <p> 
-        can't gorget the subtitle. let's see how much this adds to the div
-      </p>
-      <p> author name</p>
+        <p> {{featured.subtitle}}</p>
+        <p> {{featured.author}} </p>
     </div>
 
     {% endfor %}
@@ -75,10 +73,13 @@
 
 <div class= 'w3-border-top w3-margin-bottom' ></div>
 
-<div class="w3-row" style='margin:auto'>
+<div class="w3-row " style='margin:auto'>
     <div class='s2 w3-container w3-col w3-container ;'>
     </div>
-    <div class='s8 w3-border w3-border-black w3-container w3-margin-bottom w3-col w3-container w3-gray 'style='height:120px;'> jgkhv
+    <div class='s8 w3-gray w3-border w3-border-black w3-container w3-margin-bottom w3-col w3-container  'style='height:120px;'> 
+      <h4 class=''>Hey, thanks for checking out my project. Please let me know if you find any errors with the site. If you have any thoughts on the site in general or you're interested in contributing - reach out!
+    hello@readroom.org
+      </h4>
     </div>
     <div class='s2 w3-container w3-col w3-container '>
     </div>

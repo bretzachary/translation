@@ -29,7 +29,7 @@ class Article(models.Model):
 
 class Image(models.Model):
 	article = models.ForeignKey(Article, on_delete=models.SET_NULL, blank=True, null=True)
-	picture = models.ImageField(upload_to=user_directory_path, blank=True)
+	picture = models.ImageField(upload_to=user_directory_path, blank=True, max_length=255)
 	caption = models.CharField(max_length=512, null=True)
 
 	def __str__(self):
